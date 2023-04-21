@@ -10,7 +10,18 @@ public class Crossbowman extends Shooter { // арбалетчик
 
     @Override
     public String toString() {
-        return name;
+        return "Арбалетчик";
+    }
+
+    @Override
+    public void step() {
+
+    }
+
+    @Override
+    public String getInfo() {
+        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage +
+                " точность: " + accuracy + " дистанция: " + distance + " максимальное количество пуль: " + maxCountBullet;
     }
 }
 

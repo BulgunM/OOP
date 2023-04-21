@@ -7,6 +7,16 @@ public class Monk extends Magican { // монах
 
     @Override
     public String toString() {
-        return name;
+        return "Монах";
+    }
+
+    @Override
+    public void step() {
+    }
+
+    @Override
+    public String getInfo() {
+        return "имя: " + name + " здоровье: " + hp + " удача: " + luck +
+                " скорость: " + speed + " урон: " + damage + " мана: " + mana;
     }
 }

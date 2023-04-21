@@ -1,6 +1,8 @@
 package seminar1.Units;
 
-public class Unit {
+import seminar1.GameInterface;
+
+public abstract class Unit implements GameInterface {
 
     protected String name;
     protected float hp, luck; // количество жизней
@@ -19,4 +21,5 @@ public class Unit {
     void defend() {};
     void move() {};
     void dead() {};
+
 }

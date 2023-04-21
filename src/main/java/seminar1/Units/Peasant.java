@@ -9,6 +9,15 @@ public class Peasant extends Unit { // крестьянин
 
     @Override
     public String toString() {
-        return name;
+        return "Крестьянин";
+    }
+
+    @Override
+    public void step() {
+    }
+
+    @Override
+    public String getInfo() {
+        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage;
     }
 }

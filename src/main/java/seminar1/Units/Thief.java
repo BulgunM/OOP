@@ -10,9 +10,19 @@ public class Thief extends Unit { // разбойник
 
     @Override
     public String toString() {
-        return name;
+        return "Разбойник";
     }
 
     void dodge() {};
     void stealth() {};
+
+    @Override
+    public void step() {
+
+    }
+
+    @Override
+    public String getInfo() {
+        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage;
+    }
 }

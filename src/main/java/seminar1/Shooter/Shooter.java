@@ -1,8 +1,9 @@
 package seminar1.Shooter;
 
+import seminar1.GameInterface;
 import seminar1.Units.Unit;
 
-public class Shooter extends Unit {
+public abstract class Shooter extends Unit implements GameInterface {
      protected float accuracy;
      protected int distance, maxCountBullet, currentCountBullet;
 
