@@ -1,11 +1,14 @@
 package seminar1.Shooter;
 
 import seminar1.Shooter.Shooter;
+import seminar1.Units.Unit;
+
+import java.util.ArrayList;
 
 public class Crossbowman extends Shooter { // арбалетчик
 
-    public Crossbowman(String name) {
-        super(name, 20, 0.5f, 2, 2, 0.5f, 2, 50);
+    public Crossbowman(ArrayList<Unit> team, String name) {
+        super(6, team, name, 10, 2, new int[] {1,3}, 1, 1, 1);
     }
 
     @Override
@@ -20,8 +23,7 @@ public class Crossbowman extends Shooter { // арбалетчик
 
     @Override
     public String getInfo() {
-        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage +
-                " точность: " + accuracy + " дистанция: " + distance + " максимальное количество пуль: " + maxCountBullet;
+        return String.format("%s arrows: %d  accuracy: %d", super.getInfo(), this.arrows, this.accuracy);
     }
 }
 

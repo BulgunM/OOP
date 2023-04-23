@@ -2,9 +2,11 @@ package seminar1.Units;
 
 import seminar1.Units.Unit;
 
+import java.util.ArrayList;
+
 public class Spearman extends Unit { // копейщик
-    public Spearman(String name) {
-        super(name, 30, 0.6f, 2, 4);
+    public Spearman(ArrayList<Unit> team, String name) {
+        super(7, team, name, 12, 2, new int[] {1,3});
     }
 
     @Override
@@ -19,6 +21,6 @@ public class Spearman extends Unit { // копейщик
 
     @Override
     public String getInfo() {
-        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage;
+        return super.getInfo();
     }
 }

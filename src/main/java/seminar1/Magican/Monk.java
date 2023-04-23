@@ -1,22 +1,21 @@
 package seminar1.Magican;
 
+import seminar1.Units.Unit;
+
+import java.util.ArrayList;
+
 public class Monk extends Magican { // монах
-    public Monk(String name) {
-        super(name, 20, 0.6f, 1, 2, 20);
-    }
-
-    @Override
-    public String toString() {
-        return "Монах";
-    }
-
-    @Override
-    public void step() {
+    public Monk(ArrayList<Unit> team, String name) {
+        super(5, team, name, 14,3 , new int[] {1,4}, 2, 1);
     }
 
     @Override
     public String getInfo() {
-        return "имя: " + name + " здоровье: " + hp + " удача: " + luck +
-                " скорость: " + speed + " урон: " + damage + " мана: " + mana;
+        return String.format("%s Mana: %d  Accuracy: %d", super.getInfo(), this.mana, this.accuracy);
+    }
+
+    @Override
+    public void step() {
+
     }
 }

@@ -2,27 +2,34 @@ package seminar1.Units;
 
 import seminar1.Units.Unit;
 
-public class Thief extends Unit { // разбойник
+import java.util.ArrayList;
 
-    public Thief(String name) {
-        super(name, 20, 0.8f, 3, 2);
+public class Thief extends Unit {
+
+    protected int invisibility;
+
+    public Thief(int init, ArrayList<Unit> team, String name, int health, int armor, int[] damage, int invisibility) {
+        super(init, team, name, health, armor, damage);
+        this.invisibility = invisibility;
+    }
+
+    public Thief(ArrayList<Unit> team, String name) {
+        this(7, team, name, 10, 1, new int[]{1, 3}, 2);
     }
 
     @Override
-    public String toString() {
-        return "Разбойник";
+    public String getInfo() {
+        return String.format("%s  invisibility: %d", super.getInfo(), this.invisibility);
     }
-
-    void dodge() {};
-    void stealth() {};
 
     @Override
     public void step() {
 
     }
-
-    @Override
-    public String getInfo() {
-        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage;
-    }
 }
+
+
+
+
+
+

@@ -35,53 +35,61 @@ public class Game {
         for (int i = 0; i < 10; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team1.add(new Sniper(getName()));
+                    team1.add(new Sniper(team1, getName()));
                     break;
                 case 1:
-                    team1.add(new Crossbowman(getName()));
+                    team1.add(new Crossbowman(team1, getName()));
                     break;
                 case 2:
-                    team1.add(new Monk(getName()));
+                    team1.add(new Monk(team1, getName()));
                     break;
                 case 3:
-                    team1.add(new Thief(getName()));
+                    team1.add(new Thief(team1, getName()));
                     break;
                 case 4:
-                    team1.add(new Peasant(getName()));
+                    team1.add(new Peasant(team1, getName()));
                     break;
                 case 5:
-                    team1.add(new Spearman(getName()));
+                    team1.add(new Spearman(team1, getName()));
                     break;
             }
         }
 
         ArrayList<Unit> team2 = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 2; i++) {
             switch (new Random().nextInt(4)) {
                 case 0:
-                    team2.add(new Sniper(getName()));
+                    team2.add(new Sniper(team2, getName()));
                     break;
                 case 1:
-                    team2.add(new Crossbowman(getName()));
+                    team2.add(new Crossbowman(team2, getName()));
                     break;
                 case 2:
-                    team2.add(new Monk(getName()));
+                    team2.add(new Monk(team2, getName()));
                     break;
                 case 3:
-                    team2.add(new Thief(getName()));
+                    team2.add(new Thief(team2, getName()));
                     break;
                 case 4:
-                    team2.add(new Peasant(getName()));
+                    team2.add(new Peasant(team2, getName()));
                     break;
                 case 5:
-                    team2.add(new Spearman(getName()));
+                    team2.add(new Spearman(team2, getName()));
                     break;
             }
         }
 
-        team1.forEach(n -> System.out.println(n.getInfo()));
+        //team1.forEach(n -> System.out.println(n.getInfo()));
         System.out.println();
         team2.forEach(n -> System.out.println(n.getInfo()));
+        System.out.println();
+
+        team2.forEach(n -> n.step());
+        team2.forEach(n -> System.out.println(n.getInfo()));
+        System.out.println();
+
+        team2.sort(Unit::compareTo);
+        System.out.println(team2);
     }
 
     // Names a = Names.values()[new Random().nextInt(Names.values().length)]; выбор случайного имени из всех значений в Enum

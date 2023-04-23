@@ -2,9 +2,11 @@ package seminar1.Units;
 
 import seminar1.Units.Unit;
 
+import java.util.ArrayList;
+
 public class Peasant extends Unit { // крестьянин
-    public Peasant(String name) {
-        super(name, 20, 10, 5, 1);
+    public Peasant(ArrayList<Unit> team, String name) {
+        super(1, team, name, 11, 1, new int[] {1,2});
     }
 
     @Override
@@ -18,6 +20,6 @@ public class Peasant extends Unit { // крестьянин
 
     @Override
     public String getInfo() {
-        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage;
+        return super.getInfo();
     }
 }

@@ -1,8 +1,12 @@
 package seminar1.Shooter;
 
+import seminar1.Units.Unit;
+
+import java.util.ArrayList;
+
 public class Sniper extends Shooter{ // снайпер
-    public Sniper(String name) {
-        super(name, 20, 0.6f, 2, 4, 0.5f, 5, 10);
+    public Sniper(ArrayList<Unit> team, String name) {
+        super(6, team, name, 12, 2, new int[] {1,3}, 1, 1, 1);
     }
 
     @Override
@@ -17,7 +21,6 @@ public class Sniper extends Shooter{ // снайпер
 
     @Override
     public String getInfo() {
-        return "имя: " + name + " здоровье: " + hp + " удача: " + luck + " скорость: " + speed + " урон: " + damage +
-                " точность: " + accuracy + " дистанция: " + distance + " максимальное количество пуль: " + maxCountBullet;
+        return String.format("%s arrows: %d  accuracy: %d", super.getInfo(), this.arrows, this.accuracy);
     }
 }
