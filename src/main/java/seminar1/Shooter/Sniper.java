@@ -5,8 +5,8 @@ import seminar1.Units.Unit;
 import java.util.ArrayList;
 
 public class Sniper extends Shooter{ // снайпер
-    public Sniper(ArrayList<Unit> team, String name) {
-        super(6, team, name, 12, 2, new int[] {1,3}, 1, 1, 1);
+    public Sniper(String name, ArrayList<Unit> team) {
+        super(name, 20, 0.6f, 4, 4, 5, 10, 0.5f, 5, team);
     }
 
     @Override
@@ -14,13 +14,9 @@ public class Sniper extends Shooter{ // снайпер
         return "Снайпер";
     }
 
-    @Override
-    public void step() {
-
-    }
 
     @Override
     public String getInfo() {
-        return String.format("%s arrows: %d  accuracy: %d", super.getInfo(), this.arrows, this.accuracy);
+        return super.getInfo();
     }
 }

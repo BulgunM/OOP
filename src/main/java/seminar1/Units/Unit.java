@@ -3,62 +3,59 @@ package seminar1.Units;
 import seminar1.GameInterface;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 
-public abstract class Unit implements GameInterface, Comparable {
-protected int initiative;
+public abstract class Unit implements GameInterface {
     protected String name;
-    public int health;
-    public int maxHealth;
-    protected int armor;
-    protected int[] damage;
+    public float maxHp;
+    public float currentHp;
+    protected float luck;
+    protected float armor;
+    protected int attack;
+    public int speed;
     protected ArrayList<Unit> team;
-    protected static Random random;
 
-    static {
-        Unit.random = new Random();
-    }
-    public Unit(int initiative, ArrayList<Unit> team, String name, int health, int armor, int[] damage) {
-        this.initiative = initiative;
-        this.team = team;
+    public Unit(String name, float maxHp, float luck, int speed, int attack, float armor, ArrayList<Unit> team){
         this.name = name;
-        this.health = health;
-        this.maxHealth = health;
-        if (new Random().nextBoolean()) this.health -= 9;
+        this.maxHp = maxHp;
+        this.currentHp = maxHp;
+        this.luck = luck;
+        this.speed =speed;
+        this.attack = attack;
         this.armor = armor;
-        this.damage = damage;
+        this.team = team;
     }
 
-    public String getInfo() {
-        return String.format("Name: %s  Health: %d  Type: %s  Damage: %s  Armor: %d  %d Init",
-        this.name, this.health, this.getClass().getSimpleName(), Arrays.toString(this.damage), this.armor, this.initiative);
+    void attack(){
+    }
+    void await(){
+    }
+    void defend(){
     }
 
-    public void healed(int Hp) {
-        this.health = Hp + this.health > this.maxHealth ? this.maxHealth : Hp + this.health;
+    void die(){
     }
 
-    public void getDamage(int doneDamage) {
-        doneDamage = (int) (doneDamage * ((100 - this.armor) / 100));
-        if ((this.health - doneDamage) > 0) {
-            this.health -= doneDamage;
+    public void getDamage(float damage){
+        this.currentHp -= damage;
+        if (this.currentHp > this.maxHp) {
+            this.currentHp = this.maxHp;
+        }
+        if (this.currentHp < 0) {
+            this.currentHp = 0;
         }
     }
 
-    public void attack(Unit target) {
-        target.getDamage(new Random().nextInt(this.damage[0],this.damage[1]));
+    @Override
+    public String getInfo() {
+        return "[" + name + " " + toString() + "] hp:" +
+                currentHp + "/" + maxHp + " luck:" + luck
+                + " speed:" + speed + " attack:" + attack
+                + " armor:" + armor;
     }
 
-    public String toString() {
-        return  this.getClass().getSimpleName();
-    }
-
-    public abstract void step();
-
-    public int compareTo(Object o) {
-        Unit unit = (Unit) o;
-        return unit.initiative - this.initiative;
+    @Override
+    public void step() {
+        System.out.println(getClass().getName());
     }
 }
 

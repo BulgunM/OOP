@@ -6,14 +6,25 @@ import seminar1.Units.Unit;
 import java.util.ArrayList;
 
 public abstract class Shooter extends Unit implements GameInterface {
-     protected int arrows, maxArrows, accuracy;
+    protected int distance, maxCountBullet, currentCountBullet;
+    protected float accuracy;
 
-    public Shooter(int init, ArrayList<Unit> team, String name, int health, int armor, int[] damage, int arrows, int maxArrows, int accuracy) {
-        super(init, team, name, health, armor, damage);
-        this.arrows = arrows;
-        this.maxArrows = maxArrows;
+    public Shooter(String name, float maxHp, float luck, int speed, int attack,
+                      int distance, int maxCountBullet, float accuracy, float armor, ArrayList<Unit> team) {
+        super(name, maxHp, luck, speed, attack, armor, team);
+        this.distance = distance;
+        this.maxCountBullet = maxCountBullet;
+        this.currentCountBullet = maxCountBullet;
         this.accuracy = accuracy;
     }
 
-    void shoot() {};
+    void shoot() {
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + " distance:" + distance +
+                " bullets:" + currentCountBullet + "/" + maxCountBullet +
+                " accuracy:" + accuracy;
+    }
 }

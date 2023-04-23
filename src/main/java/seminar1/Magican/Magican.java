@@ -1,49 +1,47 @@
 package seminar1.Magican;
 
+import seminar1.Shooter.Shooter;
 import seminar1.Units.Unit;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Magican extends Unit { // колдун
-    protected int mana, maxMana, accuracy;
+public abstract class Magican extends Shooter { // колдун
+    protected float maxMana, currentMana;
 
-    public Magican(int init, ArrayList<Unit> team, String name, int health, int armor, int[] damage, int mana, int accuracy) {
-        super(init, team, name, health, armor, damage);
-        this.mana = mana;
+    public Magican(String name, float maxHp, float luck, int speed, int attack,
+            int distance, int maxCountBullet, float accuracy, float armor, float maxMana, ArrayList<Unit> team) {
+        super(name, maxHp, luck, speed, attack, distance, maxCountBullet, accuracy, armor, team);
         this.maxMana = maxMana;
-        this.accuracy = accuracy;
+        this.currentMana = maxMana;
     }
 
-    public void heal(Unit target) {
-        target.healed(new Random().nextInt(this.damage[0]));
+    void heal() {
     }
 
-    public void attack(Unit target) {
-        target.getDamage(new Random().nextInt(this.damage[0]));
+    void fire(){}
+
+    void freeze() {
     }
 
+    void addMana() {
+    }
 
+    @Override
+    public String getInfo() {
+        return super.getInfo() + " mana:" + currentMana + "/" + maxMana;
+    }
 
     @Override
     public void step() {
-        if (mana < 1) {
-            System.out.println("Нет маны");
-            return;
-        }
-        int index_damaged = 0;
-        for (int i = 0; i < team.size(); i++) {
-            for (int j = i + 1; j < team.size() - 1; j++) {
-                if (team.get(i).health != 0 || team.get(j).health != 0) {
-                    if (team.get(i).health / team.get(i).maxHealth < team.get(j).health / team.get(j).maxHealth) {
-                        index_damaged = i;
-                    }
+        if (this.currentHp > 0 && currentMana > 0) {
+            for (Unit unit : team) {
+                if (unit.currentHp < unit.maxHp) {
+                    unit.getDamage(-attack);
+                    this.currentMana--;
+                    return;
                 }
             }
         }
-        team.get(index_damaged).healed(new Random().nextInt(this.damage[0]));
-        this.mana -= 1;
     }
-
-
 }

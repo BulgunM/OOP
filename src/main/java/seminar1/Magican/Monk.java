@@ -5,17 +5,17 @@ import seminar1.Units.Unit;
 import java.util.ArrayList;
 
 public class Monk extends Magican { // монах
-    public Monk(ArrayList<Unit> team, String name) {
-        super(5, team, name, 14,3 , new int[] {1,4}, 2, 1);
+    public Monk(String name, ArrayList<Unit> team) {
+        super(name, 20, 0.6f, 2, 2, 20, 5, 1, 10, 50, team);
+    }
+
+    @Override
+    public String toString() {
+        return "Монах";
     }
 
     @Override
     public String getInfo() {
-        return String.format("%s Mana: %d  Accuracy: %d", super.getInfo(), this.mana, this.accuracy);
-    }
-
-    @Override
-    public void step() {
-
+        return super.getInfo();
     }
 }

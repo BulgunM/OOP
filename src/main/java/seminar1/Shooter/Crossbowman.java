@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Crossbowman extends Shooter { // арбалетчик
 
-    public Crossbowman(ArrayList<Unit> team, String name) {
-        super(6, team, name, 10, 2, new int[] {1,3}, 1, 1, 1);
+    public Crossbowman(String name, ArrayList<Unit> team) {
+        super(name, 20, 0.5f, 4, 2, 2, 50, 0.5f, 10, team);
     }
 
     @Override
@@ -17,13 +17,8 @@ public class Crossbowman extends Shooter { // арбалетчик
     }
 
     @Override
-    public void step() {
-
-    }
-
-    @Override
     public String getInfo() {
-        return String.format("%s arrows: %d  accuracy: %d", super.getInfo(), this.arrows, this.accuracy);
+        return super.getInfo();
     }
 }
 

@@ -5,8 +5,8 @@ import seminar1.Units.Unit;
 import java.util.ArrayList;
 
 public class Peasant extends Unit { // крестьянин
-    public Peasant(ArrayList<Unit> team, String name) {
-        super(1, team, name, 11, 1, new int[] {1,2});
+    public Peasant(String name, ArrayList<Unit> team) {
+        super(name, 10, 0.5f, 1, 1, 0, team);
     }
 
     @Override
@@ -14,9 +14,6 @@ public class Peasant extends Unit { // крестьянин
         return "Крестьянин";
     }
 
-    @Override
-    public void step() {
-    }
 
     @Override
     public String getInfo() {

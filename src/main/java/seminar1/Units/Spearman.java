@@ -5,8 +5,8 @@ import seminar1.Units.Unit;
 import java.util.ArrayList;
 
 public class Spearman extends Unit { // копейщик
-    public Spearman(ArrayList<Unit> team, String name) {
-        super(7, team, name, 12, 2, new int[] {1,3});
+    public Spearman(String name, ArrayList<Unit> team){
+        super(name, 30, 0.6f, 3, 4, 30, team);
     }
 
     @Override
@@ -14,10 +14,6 @@ public class Spearman extends Unit { // копейщик
         return "Копейщик";
     }
 
-    @Override
-    public void step() {
-
-    }
 
     @Override
     public String getInfo() {
