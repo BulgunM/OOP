@@ -4,14 +4,13 @@ import seminar1.Shooter.Shooter;
 import seminar1.Units.Unit;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class Magican extends Shooter { // колдун
     protected float maxMana, currentMana;
 
     public Magican(String name, float maxHp, float luck, int speed, int attack,
-            int distance, int maxCountBullet, float accuracy, float armor, float maxMana, ArrayList<Unit> team) {
-        super(name, maxHp, luck, speed, attack, distance, maxCountBullet, accuracy, armor, team);
+            int distance, int maxCountBullet, float accuracy, float armor, float maxMana, ArrayList<Unit> team, int x, int y) {
+        super(name, maxHp, luck, speed, attack, distance, maxCountBullet, accuracy, armor, team, x, y);
         this.maxMana = maxMana;
         this.currentMana = maxMana;
     }
@@ -33,7 +32,7 @@ public abstract class Magican extends Shooter { // колдун
     }
 
     @Override
-    public void step() {
+    public void step(ArrayList<Unit> enemy) {
         if (this.currentHp > 0 && currentMana > 0) {
             for (Unit unit : team) {
                 if (unit.currentHp < unit.maxHp) {

@@ -5,7 +5,7 @@ import seminar1.GameInterface;
 import java.util.ArrayList;
 
 public abstract class Unit implements GameInterface {
-    protected String name;
+    public String name;
     public float maxHp;
     public float currentHp;
     protected float luck;
@@ -13,8 +13,9 @@ public abstract class Unit implements GameInterface {
     protected int attack;
     public int speed;
     protected ArrayList<Unit> team;
+    public Coordinate coordinate;
 
-    public Unit(String name, float maxHp, float luck, int speed, int attack, float armor, ArrayList<Unit> team){
+    public Unit(String name, float maxHp, float luck, int speed, int attack, float armor, ArrayList<Unit> team, int x, int y){
         this.name = name;
         this.maxHp = maxHp;
         this.currentHp = maxHp;
@@ -23,16 +24,23 @@ public abstract class Unit implements GameInterface {
         this.attack = attack;
         this.armor = armor;
         this.team = team;
+        this.coordinate = new Coordinate(x, y);
     }
 
-    void attack(){
+    void attack(Unit target){
+        target.getDamage(attack);
     }
     void await(){
     }
     void defend(){
     }
 
-    void die(){
+    public boolean die(){
+        if (currentHp <= 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void getDamage(float damage){
@@ -54,9 +62,11 @@ public abstract class Unit implements GameInterface {
     }
 
     @Override
-    public void step() {
+    public void step(ArrayList<Unit> enemy) {
         System.out.println(getClass().getName());
     }
+
+
 }
 
 
