@@ -63,10 +63,18 @@ public abstract class Unit implements GameInterface {
 
     @Override
     public void step(ArrayList<Unit> enemy) {
-        System.out.println(getClass().getName());
+
+        //System.out.println(getClass().getName());
     }
 
 
+    public int[] getCoords() {
+        return new int[] {coordinate.x, coordinate.y};
+    }
+
+    public float getHp() {
+        return currentHp;
+    }
 }
 
 

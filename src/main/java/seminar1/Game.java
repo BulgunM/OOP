@@ -3,20 +3,21 @@ package seminar1;
 import seminar1.Magican.Monk;
 import seminar1.Shooter.Crossbowman;
 import seminar1.Shooter.Sniper;
-import seminar1.Units.Peasant;
-import seminar1.Units.Spearman;
-import seminar1.Units.Thief;
-import seminar1.Units.Unit;
+import seminar1.Units.*;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
-    public static void main(String[] args) {
+    public static ArrayList<Unit> team1 = new ArrayList<>();
+    public static ArrayList<Unit> team2 = new ArrayList<>();
+    public static ArrayList<Unit> team3 = new ArrayList<Unit>();
 
-        ArrayList<Unit> team1 = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+    public static void main(String[] args) {
+        for (int i = 0; i < 11; i++) {
             switch (new Random().nextInt(6)) {
                 case 0:
                     team1.add(new Sniper(getName(), team1, 1, i));
@@ -39,8 +40,7 @@ public class Game {
             }
         }
 
-        ArrayList<Unit> team2 = new ArrayList<>();
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < 11; i++) {
             switch (new Random().nextInt(6)) {
                 case 0:
                     team2.add(new Sniper(getName(), team2, 10, i));
@@ -63,7 +63,7 @@ public class Game {
             }
         }
 
-        ArrayList<Unit> team3 = new ArrayList<Unit>();
+
         team3.addAll(team1);
         team3.addAll(team2);
         team3.sort(new Comparator<Unit>() {
@@ -75,17 +75,35 @@ public class Game {
 
         });
 
+        System.out.println(Charset.defaultCharset());
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            View.view();
+            scanner.nextLine();
+            for (Unit unit : team3) {
+                if (team1.contains(unit)) {
+                    unit.step(team2);
+                } else {
+                    unit.step(team1);
+                }
+            }
+        }
+    }
+    private static String getName() {
+        return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
+    }
+/*
         team3.forEach(n -> n.getDamage(2));
 
         for (Unit unit : team1) {
             if (unit instanceof Peasant && ((Peasant) unit).readiness) { // если нашли крестьянина, который не занят
                 for (Unit enemyUnit : team2) {
                     if (!enemyUnit.die()) {
-                        System.out.println(unit.getInfo() + " доставляет стрелы");
+                        //System.out.println(unit.getInfo() + " доставляет стрелы");
                     }
                 }
                 ((Peasant) unit).readiness = false;
-                System.out.println(unit.getInfo() + " занят");
+                //System.out.println(unit.getInfo() + " занят");
                 break;
             }
         }
@@ -107,10 +125,11 @@ public class Game {
         team2.forEach(n -> System.out.println(n.getInfo()));
     }
 
+ */
+
 
     // Names a = Names.values()[new Random().nextInt(Names.values().length)]; выбор случайного имени из всех значений в Enum
 
-    private static String getName() {
-        return String.valueOf(Names.values()[new Random().nextInt(Names.values().length)]);
-    }
+
 }
+

@@ -28,18 +28,18 @@ public class Peasant extends Unit { // крестьянин
             if (unit instanceof Peasant && !unit.die() && ((Peasant) unit).readiness) {
                 ((Peasant) unit).readiness = false;
                 peasantAssigned = true;
-                System.out.println(unit.getInfo() + " доставляет стрелы");
+                //System.out.println(unit.getInfo() + " доставляет стрелы");
                 break;
             }
         }
         if (!peasantAssigned) {
-            System.out.println("Firing arrows...");
+            //System.out.println("Firing arrows...");
             for (int i = 0; i < attack; i++) {
                 if (!enemy.isEmpty()) {
                     Unit target = enemy.get(0);
                     target.getDamage(attack);
                     if (target.die()) {
-                        System.out.println(target.getInfo() + " мертв");
+                        //System.out.println(target.getInfo() + " мертв");
                         enemy.remove(target);
                     }
                 }

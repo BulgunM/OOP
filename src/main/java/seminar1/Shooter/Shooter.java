@@ -43,7 +43,7 @@ public abstract class Shooter extends Unit implements GameInterface {
                 target = u;
             }
         }
-        System.out.println(name + " стреляет в " + target.name);
+        //System.out.println(name + " стреляет в " + target.name);
         for (Unit unit : team) {
             if (unit instanceof Peasant) {
                 if (!unit.die() && ((Peasant)unit).readiness) {
