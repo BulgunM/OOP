@@ -13,7 +13,7 @@ public class Peasant extends Unit { // крестьянин
 
     @Override
     public String toString() {
-        return "Крестьянин";
+        return "Пизант";
     }
 
     @Override

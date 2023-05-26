@@ -31,23 +31,14 @@ public abstract class Shooter extends Unit implements GameInterface {
 
     @Override
     public void step(ArrayList<Unit> enemy) {
-        if (currentHp <= 0 || currentCountBullet <= 0) {
+        if (die() || currentCountBullet <= 0) {
             return;
         }
-        float minDistance = Float.MAX_VALUE;
-        Unit target = null;
-        for (Unit u: enemy) {
-            float temp = u.coordinate.getDistance(this.coordinate);
-            if (temp < minDistance) {
-                minDistance = temp;
-                target = u;
-            }
-        }
-        //System.out.println(name + " стреляет в " + target.name);
+        attack(findNearUnit(enemy));
         for (Unit unit : team) {
             if (unit instanceof Peasant) {
-                if (!unit.die() && ((Peasant)unit).readiness) {
-                    ((Peasant)unit).readiness = false;
+                if (!unit.die() && ((Peasant) unit).readiness) {
+                    ((Peasant) unit).readiness = false;
                     return;
                 }
             }

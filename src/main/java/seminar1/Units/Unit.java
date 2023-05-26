@@ -27,7 +27,7 @@ public abstract class Unit implements GameInterface {
         this.coordinate = new Coordinate(x, y);
     }
 
-    void attack(Unit target){
+    protected void attack(Unit target){
         target.getDamage(attack);
     }
     void await(){
@@ -63,10 +63,82 @@ public abstract class Unit implements GameInterface {
 
     @Override
     public void step(ArrayList<Unit> enemy) {
-
-        //System.out.println(getClass().getName());
+        if (die()) {
+            return;
+        }
+        Unit target = findNearUnit(enemy);
+        if (target.coordinate.distance(this.coordinate) < 2) {
+            attack(target);
+        }else {
+            move(target);
+        }
     }
 
+    public Unit findNearUnit(ArrayList<Unit> team){
+        Unit nearUnit = null;
+        float minDist = Float.MAX_VALUE;
+        for (Unit unit : team) {
+            if(unit.die())continue;
+            float dist = unit.coordinate.distance(this.coordinate);
+            if (minDist > dist) {
+                nearUnit = unit;
+                minDist = dist;
+            }
+        }
+        return nearUnit;
+    }
+
+    protected void move(Unit target){
+        int dx = target.coordinate.distanceXY(this.coordinate)[0];
+        int dy = target.coordinate.distanceXY(this.coordinate)[1];
+        if (Math.abs(dx) < Math.abs(dy)){
+            moveY(dx, dy, true);
+        }else {
+            moveX(dx, dy, true);
+        }
+    }
+
+    private void moveX(int dx, int dy, boolean flag){
+        if (dx > 0) {
+            if (isEmptyPosition(this.coordinate.x-1, this.coordinate.y)) {
+                this.coordinate.x--;
+            }else if(flag){
+                moveY(dx,dy, false);
+            }
+        }else {
+            if (isEmptyPosition(this.coordinate.x+1, this.coordinate.y)) {
+                this.coordinate.x++;
+            }else if(flag){
+                moveY(dx,dy, false);
+            }
+        }
+    }
+    private void moveY(int dx, int dy, boolean flag){
+        if (dy > 0) {
+            if (isEmptyPosition(this.coordinate.x, this.coordinate.y-1)) {
+                this.coordinate.y--;
+            }else if(flag){
+                moveX(dx,dy, false);
+            }
+        }else {
+            if (isEmptyPosition(this.coordinate.x, this.coordinate.y+1)) {
+                this.coordinate.y++;
+            }else if(flag){
+                moveX(dx,dy, false);
+            }
+        }
+    }
+
+    protected boolean isEmptyPosition(int x, int y){
+        for (Unit unit: team) {
+            if (unit.coordinate.x == x && unit.coordinate.y == y) {
+                if (!unit.die()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     public int[] getCoords() {
         return new int[] {coordinate.x, coordinate.y};
